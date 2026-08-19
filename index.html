@@ -89,7 +89,33 @@
   @media (max-width:640px){ .topnav{ display:none; } }
 
   /* ---------- hero / terminal ---------- */
-  .hero{ padding:64px 0 40px; }
+  .hero{ padding:64px 0 40px; position:relative; overflow:hidden; }
+
+  /* ---------- smoke ---------- */
+  .smoke-layer{
+    position:absolute; inset:-20% -10% auto -10%; height:340px;
+    pointer-events:none; z-index:0; overflow:hidden;
+  }
+  .smoke{
+    position:absolute; bottom:0;
+    width:260px; height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, rgba(228,225,216,0.05), rgba(228,225,216,0) 70%);
+    filter:blur(18px);
+    opacity:0;
+    animation:smokeRise 14s ease-in infinite;
+  }
+  .smoke.s1{ left:6%;  animation-delay:0s;  }
+  .smoke.s2{ left:38%; width:200px; height:200px; animation-delay:4.5s; }
+  .smoke.s3{ left:68%; width:300px; height:300px; animation-delay:9s; }
+  @keyframes smokeRise{
+    0%{ transform:translate(0,20px) scale(0.8); opacity:0; }
+    15%{ opacity:0.5; }
+    55%{ opacity:0.28; }
+    100%{ transform:translate(4%,-220px) scale(1.35); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .smoke{ animation:none; opacity:0; } }
+  .hero .wrap{ position:relative; z-index:1; }
   .term{
     background:var(--bg-panel);
     border:1px solid var(--line);
@@ -322,6 +348,11 @@
 </div>
 
 <header class="hero">
+  <div class="smoke-layer" aria-hidden="true">
+    <span class="smoke s1"></span>
+    <span class="smoke s2"></span>
+    <span class="smoke s3"></span>
+  </div>
   <div class="wrap">
     <div class="term" role="img" aria-label="Terminal window displaying a simulated whoami command with Dhanush Suvarna's profile summary">
       <div class="term-head">
@@ -332,7 +363,7 @@
     </div>
 
     <p class="hero-role">
-      <b>Security Research Intern</b> at eVigilantes LLP — web, mobile and network penetration testing.
+      <b>Security Research Intern</b> at Digiwork Online Services & Consultancy LLP — web, mobile and network penetration testing.
       Based in Pune, India.
     </p>
 
@@ -352,7 +383,7 @@
     <div class="finding reveal">
       <div class="finding-top">
         <span class="finding-title">Security Research Intern</span>
-        <span class="finding-org">eVigilantes LLP</span>
+        <span class="finding-org">Digiwork Online Services &amp; Consultancy LLP</span>
       </div>
       <ul>
         <li>Performing web application penetration testing and vulnerability assessments on real-world targets.</li>
